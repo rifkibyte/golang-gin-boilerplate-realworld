@@ -1,4 +1,4 @@
-module github.com/rifkiandriyanto/golang-gin-boilerplate-realworld
+module github.com/rifkibyte/golang-gin-boilerplate-realworld
 
 go 1.23.0
 

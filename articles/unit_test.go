@@ -9,8 +9,8 @@ import (
 	"testing"
 
 	"github.com/gin-gonic/gin"
-	"github.com/rifkiandriyanto/golang-gin-boilerplate-realworld/common"
-	"github.com/rifkiandriyanto/golang-gin-boilerplate-realworld/users"
+	"github.com/rifkibyte/golang-gin-boilerplate-realworld/common"
+	"github.com/rifkibyte/golang-gin-boilerplate-realworld/users"
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"

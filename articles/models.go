@@ -3,8 +3,8 @@ package articles
 import (
 	"strconv"
 
-	"github.com/rifkiandriyanto/golang-gin-boilerplate-realworld/common"
-	"github.com/rifkiandriyanto/golang-gin-boilerplate-realworld/users"
+	"github.com/rifkibyte/golang-gin-boilerplate-realworld/common"
+	"github.com/rifkibyte/golang-gin-boilerplate-realworld/users"
 	"gorm.io/gorm"
 )
 

@@ -4,7 +4,7 @@ import (
 	"sort"
 
 	"github.com/gin-gonic/gin"
-	"github.com/rifkiandriyanto/golang-gin-boilerplate-realworld/users"
+	"github.com/rifkibyte/golang-gin-boilerplate-realworld/users"
 )
 
 type TagSerializer struct {

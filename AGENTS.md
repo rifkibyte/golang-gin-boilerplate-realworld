@@ -4,7 +4,7 @@ This document provides instructions for AI coding agents working on this reposit
 
 ## Project Overview
 
-This is a **Golang/Gin** implementation of the [RealWorld](https://github.com/gothinkster/realworld) example application, forked and personalized by [rifkiandriyanto](https://github.com/rifkiandriyanto). It demonstrates a fully fledged fullstack application including CRUD operations, authentication, routing, pagination, and more.
+This is a **Golang/Gin** implementation of the [RealWorld](https://github.com/gothinkster/realworld) example application, forked and personalized by [rifkibyte](https://github.com/rifkibyte). It demonstrates a fully fledged fullstack application including CRUD operations, authentication, routing, pagination, and more.
 
 ## Technology Stack
 

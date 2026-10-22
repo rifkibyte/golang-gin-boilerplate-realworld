@@ -6,7 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
-	"github.com/rifkiandriyanto/golang-gin-boilerplate-realworld/common"
+	"github.com/rifkibyte/golang-gin-boilerplate-realworld/common"
 )
 
 // Extract token from Authorization header or query parameter

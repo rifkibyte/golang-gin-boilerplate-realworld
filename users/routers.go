@@ -3,7 +3,7 @@ package users
 import (
 	"errors"
 	"github.com/gin-gonic/gin"
-	"github.com/rifkiandriyanto/golang-gin-boilerplate-realworld/common"
+	"github.com/rifkibyte/golang-gin-boilerplate-realworld/common"
 	"net/http"
 )
 

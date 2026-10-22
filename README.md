@@ -1,7 +1,7 @@
 # Golang Gin Boilerplate — RealWorld API
 
-[![CI](https://github.com/rifkiandriyanto/golang-gin-boilerplate-realworld/actions/workflows/ci.yml/badge.svg)](https://github.com/rifkiandriyanto/golang-gin-boilerplate-realworld/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/rifkiandriyanto/golang-gin-boilerplate-realworld/blob/main/LICENSE)
+[![CI](https://github.com/rifkibyte/golang-gin-boilerplate-realworld/actions/workflows/ci.yml/badge.svg)](https://github.com/rifkibyte/golang-gin-boilerplate-realworld/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/rifkibyte/golang-gin-boilerplate-realworld/blob/main/LICENSE)
 
 > Backend API (Golang/Gin) following the [RealWorld API Spec](https://realworld-docs.netlify.app/docs/specs/backend-specs/endpoints) — CRUD, JWT authentication, pagination, and more.
 

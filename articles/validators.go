@@ -3,8 +3,8 @@ package articles
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/gosimple/slug"
-	"github.com/rifkiandriyanto/golang-gin-boilerplate-realworld/common"
-	"github.com/rifkiandriyanto/golang-gin-boilerplate-realworld/users"
+	"github.com/rifkibyte/golang-gin-boilerplate-realworld/common"
+	"github.com/rifkibyte/golang-gin-boilerplate-realworld/users"
 )
 
 type ArticleModelValidator struct {

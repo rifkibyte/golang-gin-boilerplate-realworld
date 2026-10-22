@@ -2,7 +2,7 @@ package users
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/rifkiandriyanto/golang-gin-boilerplate-realworld/common"
+	"github.com/rifkibyte/golang-gin-boilerplate-realworld/common"
 )
 
 // *ModelValidator containing two parts:

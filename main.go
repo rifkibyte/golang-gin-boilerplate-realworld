@@ -10,10 +10,10 @@ import (
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 
-	_ "github.com/rifkiandriyanto/golang-gin-boilerplate-realworld/docs"
-	"github.com/rifkiandriyanto/golang-gin-boilerplate-realworld/articles"
-	"github.com/rifkiandriyanto/golang-gin-boilerplate-realworld/common"
-	"github.com/rifkiandriyanto/golang-gin-boilerplate-realworld/users"
+	_ "github.com/rifkibyte/golang-gin-boilerplate-realworld/docs"
+	"github.com/rifkibyte/golang-gin-boilerplate-realworld/articles"
+	"github.com/rifkibyte/golang-gin-boilerplate-realworld/common"
+	"github.com/rifkibyte/golang-gin-boilerplate-realworld/users"
 	"gorm.io/gorm"
 )
 
