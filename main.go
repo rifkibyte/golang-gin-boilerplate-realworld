@@ -7,12 +7,35 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 
+	_ "github.com/rifkiandriyanto/golang-gin-boilerplate-realworld/docs"
 	"github.com/rifkiandriyanto/golang-gin-boilerplate-realworld/articles"
 	"github.com/rifkiandriyanto/golang-gin-boilerplate-realworld/common"
 	"github.com/rifkiandriyanto/golang-gin-boilerplate-realworld/users"
 	"gorm.io/gorm"
 )
+
+// @title RealWorld API
+// @version 1.0
+// @description This is a sample server for the RealWorld API specification.
+// @termsOfService http://swagger.io/terms/
+
+// @contact.name API Support
+// @contact.url http://www.swagger.io/support
+// @contact.email support@swagger.io
+
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @host localhost:8080
+// @BasePath /api
+
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
+// @description Type "Bearer" followed by a space and JWT token.
 
 func Migrate(db *gorm.DB) {
 	users.AutoMigrate()
@@ -68,6 +91,9 @@ func main() {
 
 	ping.GET("", pingHandler)
 	ping.GET("/", pingHandler)
+
+	// Swagger documentation endpoint
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	// Get port from environment variable or use default
 	port := os.Getenv("PORT")

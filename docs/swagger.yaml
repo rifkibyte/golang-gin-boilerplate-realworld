@@ -1,0 +1,911 @@
+basePath: /api
+definitions:
+  articles.ArticleRequest:
+    properties:
+      article:
+        properties:
+          body:
+            example: You have to believe
+            type: string
+          description:
+            example: Ever wonder how?
+            type: string
+          tagList:
+            example:
+            - dragons
+            - training
+            items:
+              type: string
+            type: array
+          title:
+            example: How to train your dragon
+            type: string
+        required:
+        - body
+        - description
+        - title
+        type: object
+    type: object
+  articles.CommentRequest:
+    properties:
+      comment:
+        properties:
+          body:
+            example: This is a comment
+            type: string
+        required:
+        - body
+        type: object
+    type: object
+  articles.ErrorResponse:
+    properties:
+      errors:
+        additionalProperties: true
+        type: object
+    type: object
+  articles.SwaggerArticleResponse:
+    properties:
+      article:
+        properties:
+          author:
+            properties:
+              bio:
+                type: string
+              following:
+                type: boolean
+              image:
+                type: string
+              username:
+                type: string
+            type: object
+          body:
+            type: string
+          createdAt:
+            type: string
+          description:
+            type: string
+          favorited:
+            type: boolean
+          favoritesCount:
+            type: integer
+          slug:
+            type: string
+          tagList:
+            items:
+              type: string
+            type: array
+          title:
+            type: string
+          updatedAt:
+            type: string
+        type: object
+    type: object
+  articles.SwaggerArticlesResponse:
+    properties:
+      articles:
+        items:
+          properties:
+            author:
+              properties:
+                bio:
+                  type: string
+                following:
+                  type: boolean
+                image:
+                  type: string
+                username:
+                  type: string
+              type: object
+            body:
+              type: string
+            createdAt:
+              type: string
+            description:
+              type: string
+            favorited:
+              type: boolean
+            favoritesCount:
+              type: integer
+            slug:
+              type: string
+            tagList:
+              items:
+                type: string
+              type: array
+            title:
+              type: string
+            updatedAt:
+              type: string
+          type: object
+        type: array
+      articlesCount:
+        type: integer
+    type: object
+  articles.SwaggerCommentResponse:
+    properties:
+      comment:
+        properties:
+          author:
+            properties:
+              bio:
+                type: string
+              following:
+                type: boolean
+              image:
+                type: string
+              username:
+                type: string
+            type: object
+          body:
+            type: string
+          createdAt:
+            type: string
+          id:
+            type: integer
+          updatedAt:
+            type: string
+        type: object
+    type: object
+  articles.SwaggerCommentsResponse:
+    properties:
+      comments:
+        items:
+          properties:
+            author:
+              properties:
+                bio:
+                  type: string
+                following:
+                  type: boolean
+                image:
+                  type: string
+                username:
+                  type: string
+              type: object
+            body:
+              type: string
+            createdAt:
+              type: string
+            id:
+              type: integer
+            updatedAt:
+              type: string
+          type: object
+        type: array
+    type: object
+  articles.SwaggerTagsResponse:
+    properties:
+      tags:
+        items:
+          type: string
+        type: array
+    type: object
+  users.ErrorResponse:
+    properties:
+      errors:
+        additionalProperties: true
+        type: object
+    type: object
+  users.SwaggerProfileResponse:
+    properties:
+      profile:
+        properties:
+          bio:
+            type: string
+          following:
+            type: boolean
+          image:
+            type: string
+          username:
+            type: string
+        type: object
+    type: object
+  users.SwaggerUserResponse:
+    properties:
+      user:
+        properties:
+          bio:
+            type: string
+          email:
+            type: string
+          image:
+            type: string
+          token:
+            type: string
+          username:
+            type: string
+        type: object
+    type: object
+  users.UserLoginRequest:
+    properties:
+      user:
+        properties:
+          email:
+            example: jake@jake.jake
+            type: string
+          password:
+            example: jakejake
+            type: string
+        required:
+        - email
+        - password
+        type: object
+    type: object
+  users.UserRegistrationRequest:
+    properties:
+      user:
+        properties:
+          email:
+            example: jake@jake.jake
+            type: string
+          password:
+            example: jakejake
+            type: string
+          username:
+            example: jake
+            type: string
+        required:
+        - email
+        - password
+        - username
+        type: object
+    type: object
+  users.UserUpdateRequest:
+    properties:
+      user:
+        properties:
+          bio:
+            example: I like to skateboard
+            type: string
+          email:
+            example: jake@jake.jake
+            type: string
+          image:
+            example: https://example.com/image.png
+            type: string
+          password:
+            example: newpassword
+            type: string
+          username:
+            example: jake
+            type: string
+        type: object
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server for the RealWorld API specification.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: RealWorld API
+  version: "1.0"
+paths:
+  /articles:
+    get:
+      consumes:
+      - application/json
+      description: Get a list of articles with optional filters
+      parameters:
+      - description: Filter by tag
+        in: query
+        name: tag
+        type: string
+      - description: Filter by author
+        in: query
+        name: author
+        type: string
+      - description: Filter by favorited user
+        in: query
+        name: favorited
+        type: string
+      - default: 20
+        description: Limit number of articles
+        in: query
+        name: limit
+        type: integer
+      - default: 0
+        description: Offset for pagination
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/articles.SwaggerArticlesResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+      summary: List articles
+      tags:
+      - articles
+    post:
+      consumes:
+      - application/json
+      description: Create a new article (authentication required)
+      parameters:
+      - description: Article data
+        in: body
+        name: article
+        required: true
+        schema:
+          $ref: '#/definitions/articles.ArticleRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/articles.SwaggerArticleResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Create an article
+      tags:
+      - articles
+  /articles/{slug}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete an article by slug (authentication required, must be author)
+      parameters:
+      - description: Article slug
+        in: path
+        name: slug
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Delete an article
+      tags:
+      - articles
+    get:
+      consumes:
+      - application/json
+      description: Get a single article by slug
+      parameters:
+      - description: Article slug
+        in: path
+        name: slug
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/articles.SwaggerArticleResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+      summary: Get an article
+      tags:
+      - articles
+    put:
+      consumes:
+      - application/json
+      description: Update an article by slug (authentication required, must be author)
+      parameters:
+      - description: Article slug
+        in: path
+        name: slug
+        required: true
+        type: string
+      - description: Article data
+        in: body
+        name: article
+        required: true
+        schema:
+          $ref: '#/definitions/articles.ArticleRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/articles.SwaggerArticleResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Update an article
+      tags:
+      - articles
+  /articles/{slug}/comments:
+    get:
+      consumes:
+      - application/json
+      description: Get all comments for an article by slug
+      parameters:
+      - description: Article slug
+        in: path
+        name: slug
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/articles.SwaggerCommentsResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+      summary: Get comments for an article
+      tags:
+      - comments
+    post:
+      consumes:
+      - application/json
+      description: Add a comment to an article by slug (authentication required)
+      parameters:
+      - description: Article slug
+        in: path
+        name: slug
+        required: true
+        type: string
+      - description: Comment data
+        in: body
+        name: comment
+        required: true
+        schema:
+          $ref: '#/definitions/articles.CommentRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/articles.SwaggerCommentResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Add a comment to an article
+      tags:
+      - comments
+  /articles/{slug}/comments/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a comment by ID (authentication required, must be author)
+      parameters:
+      - description: Article slug
+        in: path
+        name: slug
+        required: true
+        type: string
+      - description: Comment ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Delete a comment
+      tags:
+      - comments
+  /articles/{slug}/favorite:
+    delete:
+      consumes:
+      - application/json
+      description: Unfavorite an article by slug (authentication required)
+      parameters:
+      - description: Article slug
+        in: path
+        name: slug
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/articles.SwaggerArticleResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Unfavorite an article
+      tags:
+      - articles
+    post:
+      consumes:
+      - application/json
+      description: Favorite an article by slug (authentication required)
+      parameters:
+      - description: Article slug
+        in: path
+        name: slug
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/articles.SwaggerArticleResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Favorite an article
+      tags:
+      - articles
+  /articles/feed:
+    get:
+      consumes:
+      - application/json
+      description: Get articles from users you follow (authentication required)
+      parameters:
+      - default: 20
+        description: Limit number of articles
+        in: query
+        name: limit
+        type: integer
+      - default: 0
+        description: Offset for pagination
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/articles.SwaggerArticlesResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Get article feed
+      tags:
+      - articles
+  /profiles/{username}:
+    get:
+      consumes:
+      - application/json
+      description: Get a user's profile by username
+      parameters:
+      - description: Username
+        in: path
+        name: username
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/users.SwaggerProfileResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/users.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Get profile by username
+      tags:
+      - profiles
+  /profiles/{username}/follow:
+    delete:
+      consumes:
+      - application/json
+      description: Unfollow a user by username
+      parameters:
+      - description: Username
+        in: path
+        name: username
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/users.SwaggerProfileResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/users.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/users.ErrorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/users.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Unfollow a user
+      tags:
+      - profiles
+    post:
+      consumes:
+      - application/json
+      description: Follow a user by username
+      parameters:
+      - description: Username
+        in: path
+        name: username
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/users.SwaggerProfileResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/users.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/users.ErrorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/users.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Follow a user
+      tags:
+      - profiles
+  /tags:
+    get:
+      consumes:
+      - application/json
+      description: Get a list of all tags
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/articles.SwaggerTagsResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/articles.ErrorResponse'
+      summary: Get all tags
+      tags:
+      - tags
+  /user:
+    get:
+      consumes:
+      - application/json
+      description: Get the currently authenticated user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/users.SwaggerUserResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/users.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Get current user
+      tags:
+      - users
+    put:
+      consumes:
+      - application/json
+      description: Update the currently authenticated user
+      parameters:
+      - description: User update info
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/users.UserUpdateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/users.SwaggerUserResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/users.ErrorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/users.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Update current user
+      tags:
+      - users
+  /users:
+    post:
+      consumes:
+      - application/json
+      description: Register a new user account
+      parameters:
+      - description: User registration info
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/users.UserRegistrationRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/users.SwaggerUserResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/users.ErrorResponse'
+      summary: Register a new user
+      tags:
+      - users
+  /users/login:
+    post:
+      consumes:
+      - application/json
+      description: Login with email and password
+      parameters:
+      - description: User login credentials
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/users.UserLoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/users.SwaggerUserResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/users.ErrorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/users.ErrorResponse'
+      summary: Login user
+      tags:
+      - users
+securityDefinitions:
+  ApiKeyAuth:
+    description: Type "Bearer" followed by a space and JWT token.
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
